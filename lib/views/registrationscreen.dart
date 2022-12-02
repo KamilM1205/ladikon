@@ -9,10 +9,16 @@ class RegistrationScreen extends StatefulWidget {
   RegistrationScreenState createState() => RegistrationScreenState();
 }
 
+
+
 class RegistrationScreenState extends State<RegistrationScreen> {
+  bool isAccepted = false;
+  
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
+        
         appBar: AppBar(
           title: const Text("Регистрация"),
         ),
@@ -25,7 +31,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 Container(
                   padding: const EdgeInsets.only(top: 40, bottom: 10),
                   child: const Text(
-                    "Вход",
+                    "Регистрация",
                     style: TextStyle(
                         color: AppColors.text,
                         fontSize: 64,
@@ -47,9 +53,57 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                       controller: null,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          label: Text("Почта"),
+                          hintText: "Ваша почта"),
+                    )),
+                const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: null,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text("Номер телефона"),
+                          hintText: "Введите ваш номер"),
+                    )),
+                const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: null,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text("Логин"),
+                          hintText: "Почта/номер телефона"),
+                    )),
+                const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: null,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
                           label: Text("Пароль"),
                           hintText: "Ваш пароль"),
                     )),
+                const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: null,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text("Подтвердите ваш пароль"),
+                          hintText: "Ваш пароль"),
+                    )),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Checkbox(
+                    value: isAccepted, 
+                    onChanged: (bool? value) {
+                      setState(() {
+                          isAccepted = value!;
+                        }
+                      );
+                    },
+                  )
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: ElevatedButton(
@@ -63,7 +117,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           MaterialStatePropertyAll(AppColors.primary),
                     ),
                     onPressed: () => setState(() => {}),
-                    child: const Text('Войти'),
+                    child: const Text('Регистрация'),
                   ),
                 ),
               ],
