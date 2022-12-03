@@ -9,7 +9,17 @@ class RegistrationScreen extends StatefulWidget {
   RegistrationScreenState createState() => RegistrationScreenState();
 }
 
-
+Padding mTextField(String newLabel, String newHintText) {
+  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: null,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          label: Text(newLabel),
+                          hintText: newHintText),
+                  ));
+}
 
 class RegistrationScreenState extends State<RegistrationScreen> {
   bool isAccepted = false;
@@ -38,62 +48,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Логин"),
-                          hintText: "Почта/номер телефона"),
-                    )),
-                const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Почта"),
-                          hintText: "Ваша почта"),
-                    )),
-                const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Номер телефона"),
-                          hintText: "Введите ваш номер"),
-                    )),
-                const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Логин"),
-                          hintText: "Почта/номер телефона"),
-                    )),
-                const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Пароль"),
-                          hintText: "Ваш пароль"),
-                    )),
-                const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text("Подтвердите ваш пароль"),
-                          hintText: "Ваш пароль"),
-                    )),
+                
+                mTextField("Имя", "Ваше имя"),
+                mTextField("Фамилия", "Ваша фамилия"),
+                mTextField("Логин", "Ваш логин"),
+                mTextField("Почта", "Ваша почта"),
+                mTextField("Номер телефона", "Ваш номер телефона"),
+                mTextField("Пароль", "Ваш пароль"),
+                mTextField("Повторите ваш пароль", "Ващ пароль повторно"),
+                
                 Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Checkbox(
                     value: isAccepted, 
                     onChanged: (bool? value) {
