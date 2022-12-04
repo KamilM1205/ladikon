@@ -1,8 +1,18 @@
+import 'package:flutter/cupertino.dart';
+
 class RegistrationController {
-  bool isChecked = false;
+  
+  final nameFieldController = TextEditingController();
+  final surnameFieldController = TextEditingController();
+  final patronymicFieldController = TextEditingController();
+  final birthdayFieldController = TextEditingController();
+  final phoneFieldController = TextEditingController();
+  final passwordFieldContoller = TextEditingController();
+  final doublePasswordFieldController = TextEditingController();
 
- void checkBoxed(bool somethingidk) {
-    
- }
+  void tryRegistrate(BuildContext context) {
+    if (passwordFieldContoller.text != doublePasswordFieldController.text) {
 
+    }
+  }
 }

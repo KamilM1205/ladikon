@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ladikon/colors.dart';
+import 'package:ladikon/controllers/login_controller.dart';
+import 'package:ladikon/controllers/registration_controller.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -9,24 +11,50 @@ class RegistrationScreen extends StatefulWidget {
   RegistrationScreenState createState() => RegistrationScreenState();
 }
 
-Padding mTextField(String newLabel, String newHintText) {
+Padding mPasswordField(String newLabel, String newHintText, TextEditingController newController) {
   return Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: null,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          label: Text(newLabel),
-                          hintText: newHintText),
-                  ));
+    padding: const EdgeInsets.all(10),
+    child: TextField(
+      controller: newController,
+      
+      decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          label: Text(newLabel),
+          hintText: newHintText,
+      ),
+    )
+  );
+}
+
+Padding mTextField(String newLabel, String newHintText, TextEditingController newController) {
+  return Padding(   
+    padding: const EdgeInsets.all(10),
+    child: TextField(
+      controller: newController,
+      
+      decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          label: Text(newLabel),
+          hintText: newHintText,
+      ),
+    )
+  );
 }
 
 class RegistrationScreenState extends State<RegistrationScreen> {
   bool isAccepted = false;
   
+  var controller = RegistrationController();
+
+  var passwordField =  mTextField("Пароль", "Ваш пароль", RegistrationController().passwordFieldContoller);
+
+
   @override
   
   Widget build(BuildContext context) {
+    var passwordField =  mTextField("Пароль", "Ваш пароль", controller.passwordFieldContoller);
+
+
     return Scaffold(
         
         appBar: AppBar(
@@ -36,7 +64,9 @@ class RegistrationScreenState extends State<RegistrationScreen> {
           child: Container(
             width: 480,
             alignment: Alignment.center,
-            child: Column(
+            child: SingleChildScrollView(
+              child: 
+               Column(
               children: [
                 Container(
                   padding: const EdgeInsets.only(top: 40, bottom: 10),
@@ -49,24 +79,20 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
                 
-                mTextField("Имя", "Ваше имя"),
-                mTextField("Фамилия", "Ваша фамилия"),
-                mTextField("Логин", "Ваш логин"),
-                mTextField("Почта", "Ваша почта"),
-                mTextField("Номер телефона", "Ваш номер телефона"),
-                mTextField("Пароль", "Ваш пароль"),
-                mTextField("Повторите ваш пароль", "Ващ пароль повторно"),
+
+                mTextField("Имя", "Ваше имя", controller.nameFieldController),
+                mTextField("Фамилия", "Ваша фамилия", controller.surnameFieldController),
+                mTextField("Отчество", "Ваше отчество", controller.patronymicFieldController),
+                mTextField("Номер телефона", "Ваш номер телефона", controller.phoneFieldController),
+                passwordField,
+                mTextField("Повторите ваш пароль", "Ваш пароль повторно", controller.doublePasswordFieldController),
                 
+
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Checkbox(
                     value: isAccepted, 
-                    onChanged: (bool? value) {
-                      setState(() {
-                          isAccepted = value!;
-                        }
-                      );
-                    },
+                    onChanged: (bool? value) {setState(() {isAccepted = value!;});},
                   )
                 ),
                 Padding(
@@ -86,8 +112,10 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
               ],
+              ),
             ),
           ),
-        ));
+        )
+    );
   }
 }
